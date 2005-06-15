@@ -1,6 +1,12 @@
 
+                CHANGES IN `modeltools' VERSION 0.2-2
+
+
+    o    remove special code for `Surv' objects in ParseFormula
+
 
                 CHANGES IN `modeltools' VERSION 0.2-0
+
 
     o    `Predict' checks for `StatModel' objects being available
 
@@ -11,6 +17,7 @@
 
 
                 CHANGES IN `modeltools' VERSION 0.1-2
+
 
     o    `set' and `get' functions have an additional `envir' argument. This is
          now used by `clone', for example.

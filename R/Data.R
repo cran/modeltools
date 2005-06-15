@@ -139,20 +139,10 @@ ParseFormula <- function(formula, data = list()) {
         fblocks <- NULL
     }
   
-    fcensored <- NULL
-  
-    if (!is.null(fresponse) && length(fresponse[[2]]) == 3) {
-        if (fresponse[[2]][[1]] == "Surv") {
-            fcensored <- formula(paste("~", fresponse[[2]][[3]]))
-            fresponse <- formula(paste("~", fresponse[[2]][[2]])) 
-        }
-    }
-
     RET = new("FormulaParts")
   
     RET@formula$response <- fresponse
     RET@formula$input <- finput
-    RET@formula$censored <- fcensored
     RET@formula$blocks <- fblocks
 
     return(RET)
