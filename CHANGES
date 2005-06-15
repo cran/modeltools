@@ -1,0 +1,20 @@
+
+
+                CHANGES IN `modeltools' VERSION 0.2-0
+
+    o    `Predict' checks for `StatModel' objects being available
+
+    o    `linearModel@fit' now returns an object of class `statmodel_lm'
+         which inherits from `lm' and has its own `predict' method (in S3)
+
+    o    prepare for CRAN submission
+
+
+                CHANGES IN `modeltools' VERSION 0.1-2
+
+    o    `set' and `get' functions have an additional `envir' argument. This is
+         now used by `clone', for example.
+
+    o    lmfit now returns a `lm' object with element `predict_response' for
+         computing predictions.
+

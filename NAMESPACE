@@ -1,0 +1,12 @@
+
+import(methods)
+
+export(ModelEnvFormula, linearModel, Predict)
+
+exportClasses("ModelEnv", "FormulaParts", "ModelEnvFormula", "StatModel",
+              "StatModelCapabilities")
+
+exportMethods("subset", "show", "dimension", "clone", "has", "initialize",
+              "fit", "dpp", "na.omit", "na.fail", "na.pass", "subset")
+
+S3method(predict, statmodel_lm)
