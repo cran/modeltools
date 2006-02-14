@@ -1,3 +1,7 @@
+CHANGES IN `modeltools' VERSION 0.2-4
+
+  o add survReg objects as an interface to survival::survreg
+
 CHANGES IN `modeltools' VERSION 0.2-3
 
   o checkData does no longer insist that columns of a new data frame

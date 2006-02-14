@@ -20,6 +20,12 @@
 \alias{print.glinearModel}
 \alias{model.matrix.glinearModel}
 
+\alias{survReg}
+\alias{fitted.survReg}
+\alias{logLik.survReg}
+\alias{print.survReg}
+\alias{weights.survReg}
+
 \title{Class "StatModel"}
 \description{ A class for unfitted statistical models. }
 \section{Objects from the Class}{
@@ -59,7 +65,8 @@ Objects can be created by calls of the form \code{new("StatModel", ...)}.
   \code{"glinearModel"} (inheriting from \code{"glm"}), respectively. Some 
   methods for S3 generics such as \code{predict}, \code{fitted}, \code{print}
   and \code{model.matrix} are provided to make use of the \code{"StatModel"}
-  structure.
+  structure. (Similarly, \code{survReg} provides an experimental interface to
+  \code{\link[survival]{survreg}}.)
 }
 \examples{
 
