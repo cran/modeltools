@@ -5,7 +5,8 @@
 ModelEnvFormula <- function(formula, data = list(), subset = NULL, 
                             na.action = NULL, frame = NULL,
                             other = list(), designMatrix = TRUE,
-                            responseMatrix = TRUE, ...) {
+                            responseMatrix = TRUE, ...)
+{
   
     mf <- match.call(expand.dots = FALSE)
     m <- match(c("formula", "data", "subset", "na.action"),
@@ -92,11 +93,14 @@ ModelEnvFormula <- function(formula, data = list(), subset = NULL,
 checkData <- function(old, new) {
 
     if (!is.null(old)){
-
-        if (!identical(lapply(old, class), lapply(new, class)))
+        
+        if(!all(names(old) %in% names(new)))
+            stop("New data must contain the same columns as the original data")
+        
+        if (!identical(lapply(old, class), lapply(new[names(old)], class)))
             stop("Classes of new data do not match original data")
 
-        if (!identical(lapply(old, levels), lapply(new, levels)))
+        if (!identical(lapply(old, levels), lapply(new[names(old)], levels)))
             stop("Levels in factors of new data do not match original data")
     }
 }
@@ -146,4 +150,89 @@ ParseFormula <- function(formula, data = list()) {
     RET@formula$blocks <- fblocks
 
     return(RET)
+}
+
+
+###**********************************************************
+
+## A simple model environment where designMatrix and responseMatrix
+## are directly specified. Usefull for models without a formula
+## interface. This is much more limited than ModelEnvFormula, but can
+## be faster because no formula parsing is necessary. The subset
+## argument needs to be a indexing vector into the design and response
+## matrix, respectively. Funny things may happen if the matrices have
+## no column names and the @[gs]et slots are used in combination with
+## new data <FIXME>is proper handling of that case possible?</FIXME>
+
+ModelEnvMatrix <- function(designMatrix=NULL, responseMatrix=NULL,
+                           subset = NULL, na.action = NULL,
+                           ...)
+{    
+    MEM <- new("ModelEnv")
+
+    N <- max(nrow(designMatrix), nrow(responseMatrix))
+    
+    if(is.null(subset) && N>0) subset <- 1:N
+    
+    if(!is.null(designMatrix))
+        assign("designMatrix",
+               as.matrix(designMatrix)[subset,,drop=FALSE],
+               envir = MEM@env)
+    
+    if(!is.null(designMatrix))
+        assign("responseMatrix",
+               as.matrix(responseMatrix)[subset,,drop=FALSE],
+               envir = MEM@env)
+    
+    MEM@get <- function(which, data=NULL, frame=NULL, envir = MEM@env)
+    {
+        if(is.null(data))
+            RET <- get(which, envir = envir, inherits=FALSE)
+        else
+        {    
+            if(is.null(colnames(data)))
+                colNames(data) <- createColnames(data)
+        
+            oldNames <- colnames(get(which, envir = envir,
+                                     inherits=FALSE))
+            RET <- data[,oldNames,drop=FALSE]
+        }
+        return(RET)
+    }
+    
+    MEM@set <- function(which = NULL, data = NULL, frame=NULL,
+                        envir = MEM@env)
+    {
+        if(is.null(which))
+            which <- c("designMatrix", "responseMatrix")
+        
+        if(is.null(data))
+            stop("No data specified")
+        
+        if (any(duplicated(which)))
+            stop("Some model terms used more than once")
+        
+        if(is.null(colnames(data)))
+            colNames(data) <- createColnames(data)
+        
+        for (name in which){
+            
+            oldNames <- colnames(get(name, envir = envir,
+                                     inherits=FALSE))
+            
+            assign(name, as.matrix(data[,oldNames,drop=FALSE]),
+                   envir = envir)            
+        }
+    }
+    
+    ## handle NA's
+    if (!is.null(na.action))
+        MEM <- na.action(MEM)
+    MEM
+}
+
+## Make sure that every matrix has column names
+createColnames <- function(data)
+{
+    paste("V",1:ncol(data),sep=".")
 }

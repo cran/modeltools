@@ -29,3 +29,9 @@ system.time(for (i in 1:100) p2 <- Predict(mod2, dn))
 system.time(for (i in 1:100) p1 <- predict(mod1, dn))
 system.time(for (i in 1:100) p2 <- predict(mod2, dn))
 
+### check bug fix: non-misssing `data' argument
+df <- data.frame(y = 1:10, x = 1:10 + 1, z = 1:10 + 2)
+mf <- ModelEnvFormula(y ~ x, data = df, other = list(part = ~ z))
+stopifnot(isTRUE(all.equal(mf@get("part")$z, df[["z"]])))             
+df2 <- df + 1
+stopifnot(isTRUE(all.equal(mf@get("part", data = df2)$z, df2[["z"]])))

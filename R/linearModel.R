@@ -15,14 +15,14 @@ lmfit <- function(object, weights = NULL, ...){
     }
 
     ### returns a model inheriting from `mlm' or / and `lm'
-    class(z) <- c("statmodel_lm", if (is.matrix(z$fitted)) "mlm", "lm")
+    class(z) <- c("linearModel", if (is.matrix(z$fitted)) "mlm", "lm")
     z$offset <- 0
     z$contrasts <- attr(object@get("designMatrix"), "contrasts")
     z$xlevels <- attr(object@get("designMatrix"), "xlevels")
     z$terms <- attr(object@get("input"), "terms")
     
     ### predict.lm will fails since we cannot provide 
-    ### correct $Call and $terms elements.
+    ### correct $call and $terms elements.
     z$predict_response <- function(newdata = NULL) {
         if (!is.null(newdata)) {
             penv <- new.env()
@@ -35,6 +35,8 @@ lmfit <- function(object, weights = NULL, ...){
         if (ncol(pr) == 1) pr <- drop(pr)
         return(pr)
     }
+    z$addargs <- list(...)
+    z$ModelEnv <- object
     z$statmodel <- linearModel
     z
 }
@@ -52,5 +54,22 @@ linearModel <- new("StatModel",
 )
 
 ### we would like to advocate `Predict', but anyway
-predict.statmodel_lm <- function(object, newdata = NULL, ...)
+predict.linearModel <- function(object, newdata = NULL, ...)
     linearModel@predict(object, newdata = newdata)
+
+fitted.linearModel <- function(object, ...)
+    object$predict_response()
+
+weights.linearModel <- function(object, ...) {
+    if(is.null(object$weights)) rep(1, NROW(object$residuals)) else object$weights
+}
+
+print.linearModel <- function(x, digits = max(3, getOption("digits") - 3), ...)
+{
+    cat("Linear model with coefficients:\n")
+    print.default(format(coef(x), digits = digits), print.gap = 2, quote = FALSE)
+    invisible(x)
+}
+
+model.matrix.linearModel <- function(object, ...)
+  object$ModelEnv@get("designMatrix")

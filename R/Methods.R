@@ -46,7 +46,7 @@ setMethod("show", signature = "ModelEnv",
     }
     else if (has(object, "designMatrix")) {
         cat("  design matrix column(s): ",
-            colnames(object@get("input")), "\n")
+            colnames(object@get("designMatrix")), "\n")
         n <- nrow(object@get("designMatrix"))
     }
     
@@ -57,6 +57,7 @@ setMethod("show", signature = "ModelEnv",
     cat("\n")
 
 })
+
 
 
 setGeneric("has", function(object, which) standardGeneric("has"))

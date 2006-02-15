@@ -1,27 +1,42 @@
+CHANGES IN `modeltools' VERSION 0.2-3
 
-                CHANGES IN `modeltools' VERSION 0.2-2
+  o checkData does no longer insist that columns of a new data frame
+    are in the same order as in the original data frame.
 
+  o fxied a bug in the show() method for ModelEnv objects
 
-    o    remove special code for `Surv' objects in ParseFormula
+  o new ModelEnv creator function ModelEnvMatrix
 
+  o `linearModel@fit' now returns an object of class `linearModel'
+  
+  o `glinearModel' object added
+  
+  o S3 methods for (g)linearModel objects added (fitted, model.matrix, ...)
+  
 
-                CHANGES IN `modeltools' VERSION 0.2-0
-
-
-    o    `Predict' checks for `StatModel' objects being available
-
-    o    `linearModel@fit' now returns an object of class `statmodel_lm'
-         which inherits from `lm' and has its own `predict' method (in S3)
-
-    o    prepare for CRAN submission
-
-
-                CHANGES IN `modeltools' VERSION 0.1-2
+CHANGES IN `modeltools' VERSION 0.2-2
 
 
-    o    `set' and `get' functions have an additional `envir' argument. This is
-         now used by `clone', for example.
+  o remove special code for `Surv' objects in ParseFormula
 
-    o    lmfit now returns a `lm' object with element `predict_response' for
-         computing predictions.
+
+CHANGES IN `modeltools' VERSION 0.2-0
+
+
+  o `Predict' checks for `StatModel' objects being available
+
+  o `linearModel@fit' now returns an object of class `statmodel_lm'
+    which inherits from `lm' and has its own `predict' method (in S3)
+
+  o prepare for CRAN submission
+
+
+CHANGES IN `modeltools' VERSION 0.1-2
+
+
+  o `set' and `get' functions have an additional `envir' argument. This is
+    now used by `clone', for example.
+
+  o lmfit now returns a `lm' object with element `predict_response' for
+    computing predictions.
 

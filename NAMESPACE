@@ -1,7 +1,7 @@
 
 import(methods)
 
-export(ModelEnvFormula, linearModel, Predict)
+export(ModelEnvFormula, ModelEnvMatrix, linearModel, glinearModel, Predict)
 
 exportClasses("ModelEnv", "FormulaParts", "ModelEnvFormula", "StatModel",
               "StatModelCapabilities")
@@ -9,4 +9,12 @@ exportClasses("ModelEnv", "FormulaParts", "ModelEnvFormula", "StatModel",
 exportMethods("subset", "show", "dimension", "clone", "has", "initialize",
               "fit", "dpp", "na.omit", "na.fail", "na.pass", "subset")
 
-S3method(predict, statmodel_lm)
+S3method(fitted, glinearModel)
+S3method(fitted, linearModel)
+S3method(model.matrix, glinearModel)
+S3method(model.matrix, linearModel)
+S3method(predict, glinearModel)
+S3method(predict, linearModel)
+S3method(print, glinearModel)
+S3method(print, linearModel)
+S3method(weights, linearModel)
