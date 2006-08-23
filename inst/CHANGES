@@ -1,3 +1,8 @@
+
+CHANGES IN `modeltools' VERSION 0.2-5
+
+  o import(stats)
+
 CHANGES IN `modeltools' VERSION 0.2-4
 
   o add survReg objects as an interface to survival::survreg

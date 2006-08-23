@@ -1,5 +1,6 @@
 
 import(methods)
+import(stats)
 
 export(ModelEnvFormula, ModelEnvMatrix, linearModel, glinearModel, survReg, Predict)
 
