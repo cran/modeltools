@@ -1,4 +1,8 @@
 
+CHANGES IN `modeltools' VERSION 0.2-6
+
+  o fix codetools problems
+
 CHANGES IN `modeltools' VERSION 0.2-5
 
   o import(stats)

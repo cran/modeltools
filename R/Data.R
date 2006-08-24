@@ -191,7 +191,7 @@ ModelEnvMatrix <- function(designMatrix=NULL, responseMatrix=NULL,
         else
         {    
             if(is.null(colnames(data)))
-                colNames(data) <- createColnames(data)
+                colnames(data) <- createColnames(data)
         
             oldNames <- colnames(get(which, envir = envir,
                                      inherits=FALSE))
@@ -213,7 +213,7 @@ ModelEnvMatrix <- function(designMatrix=NULL, responseMatrix=NULL,
             stop("Some model terms used more than once")
         
         if(is.null(colnames(data)))
-            colNames(data) <- createColnames(data)
+            colnames(data) <- createColnames(data)
         
         for (name in which){
             
