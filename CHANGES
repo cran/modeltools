@@ -1,4 +1,8 @@
 
+CHANGES IN `modeltools' VERSION 0.2-7
+
+  o add methods and stats to Depends:
+
 CHANGES IN `modeltools' VERSION 0.2-6
 
   o fix codetools problems
