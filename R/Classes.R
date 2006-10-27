@@ -5,8 +5,8 @@ setClass("ModelEnv",
     representation(
         env = "environment",
         get = "function",
-        set = "function")
-)
+        set = "function",
+        hooks = "list"))
 
 ### a class for formulae
 

@@ -8,7 +8,8 @@
 \usage{
 ModelEnvFormula(formula, data = list(), subset = NULL, 
                 na.action = NULL, frame = NULL, other = list(), 
-                designMatrix = TRUE, responseMatrix = TRUE, ...)
+                designMatrix = TRUE, responseMatrix = TRUE,
+                setHook = NULL, ...)
 }
 \arguments{
   \item{formula}{ a symbolic description of the model to be fit. }
@@ -28,6 +29,8 @@ ModelEnvFormula(formula, data = list(), subset = NULL,
   \item{responseMatrix}{ a logical indicating whether the design matrix
                        defined by the left hand side of \code{formula}
                        should be computed.  }
+  \item{setHook}{ a list of functions to \code{\link{MEapply}} every
+    time \code{set} is called on the object.  }
   \item{\dots}{ additional arguments for be passed to function, for example
                 \code{contrast.arg} to \code{\link{model.matrix}}. }
 }

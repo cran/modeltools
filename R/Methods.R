@@ -54,7 +54,22 @@ setMethod("show", signature = "ModelEnv",
         cat("  no observations\n")
     else
         cat("  number of observations:", n, "\n")
+
+    if(length(object@hooks)>0){
+            for(n in 1:length(object@hooks)){
+                if(n==1)
+                    cat("  hooks                 : ")
+                else
+                    cat("                          ")
+                
+                cat(paste(names(object@hooks)[n],"(",
+                          paste(names(object@hooks[[n]]), collapse=", "),
+                          ")", sep=""), "\n")
+            }
+        }
+                    
     cat("\n")
+        
 
 })
 
@@ -111,29 +126,26 @@ setMethod("clone", signature = "ModelEnv",
     return(z)
 })
 
-setGeneric("subset", useAsDefault = subset)
+setGeneric("subset", function(x, ...) standardGeneric("subset"))
 
 setMethod("subset", signature = "ModelEnv",
-    definition = function(x, subset, clone = TRUE, ...) {
-
-    if (clone)
-        z <- clone(x, copydata = FALSE)
-
-    for (name in ls(x@env)){
-        if (is(x@get(name), "matrix")) {
-            assign(name, x@get(name)[subset,,drop=FALSE], envir = z@env)
-        } else {
-            assign(name, subset(x@get(name), subset, ...), envir = z@env)
-        }
+          definition = function(x, subset, clone = TRUE, ...)
+{
+    MYSUBSET <- function(x, subset, ...){
+        if (is(x, "matrix"))
+            x[subset,,drop=FALSE]
+        else
+            subset(x, subset, ...)
     }
+
+    z <- MEapply(x, MYSUBSET, clone=clone, subset=subset, ...)
 
     if (!clone)
         invisible(z)
     else
         return(z)
     
-    }
-)
+})
 
 ### dpp, fit and predict generics for StatModel objects
 

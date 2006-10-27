@@ -3,8 +3,7 @@ survReg <- new("StatModel",
      name = "survival regression",
      dpp = ModelEnvFormula,
      fit = function(object, weights = NULL, ...){
-         stopifnot(require("survival"))
-	 
+         
          mydata <- cbind(object@get("response"), object@get("input"))
          names(mydata)[[1]] <- "y"
          if (!is.null(weights)) {

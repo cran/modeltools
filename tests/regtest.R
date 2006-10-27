@@ -35,3 +35,9 @@ mf <- ModelEnvFormula(y ~ x, data = df, other = list(part = ~ z))
 stopifnot(isTRUE(all.equal(mf@get("part")$z, df[["z"]])))             
 df2 <- df + 1
 stopifnot(isTRUE(all.equal(mf@get("part", data = df2)$z, df2[["z"]])))
+
+### ~ 1
+df <- data.frame(y = 1:10)
+mf <- ModelEnvFormula(y ~ 1, data = df)
+x <- mf@get("designMatrix")
+stopifnot(nrow(x) == 10 && all(x[,1] == 1))

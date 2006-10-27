@@ -5,7 +5,8 @@
 ModelEnvFormula <- function(formula, data = list(), subset = NULL, 
                             na.action = NULL, frame = NULL,
                             other = list(), designMatrix = TRUE,
-                            responseMatrix = TRUE, ...)
+                            responseMatrix = TRUE,
+                            setHook=NULL, ...)
 {
   
     mf <- match.call(expand.dots = FALSE)
@@ -20,6 +21,7 @@ ModelEnvFormula <- function(formula, data = list(), subset = NULL,
 
     MEF <- new("ModelEnvFormula")
     MEF@formula <- c(ParseFormula(formula, data=data)@formula, other)
+    MEF@hooks$set <- setHook
     
     if (is.null(frame)) frame <- parent.frame()
 
@@ -78,6 +80,7 @@ ModelEnvFormula <- function(formula, data = list(), subset = NULL,
                        envir = envir)
             }
         }
+        MEapply(MEF, MEF@hooks$set, clone=FALSE)
     }
     
     MEF@set(which = NULL, data = data, frame = frame)
@@ -116,8 +119,7 @@ ParseFormula <- function(formula, data = list()) {
     if (length(formula) == 3) {
         fresponse <- formula[c(1,2)]
         frhs <- formula[c(1,3)]
-        if (frhs[[2]] == "1")
-            frhs <- NULL
+        ### if (frhs[[2]] == "1") frhs <- NULL
     }
   
     if (length(formula) == 2) {
@@ -166,7 +168,7 @@ ParseFormula <- function(formula, data = list()) {
 
 ModelEnvMatrix <- function(designMatrix=NULL, responseMatrix=NULL,
                            subset = NULL, na.action = NULL,
-                           ...)
+                           other=list(), ...)
 {    
     MEM <- new("ModelEnv")
 
@@ -179,10 +181,21 @@ ModelEnvMatrix <- function(designMatrix=NULL, responseMatrix=NULL,
                as.matrix(designMatrix)[subset,,drop=FALSE],
                envir = MEM@env)
     
-    if(!is.null(designMatrix))
+    if(!is.null(responseMatrix))
         assign("responseMatrix",
                as.matrix(responseMatrix)[subset,,drop=FALSE],
                envir = MEM@env)
+
+    for(n in names(other)){
+        if(is.matrix(other[[n]]))
+            assign(n,
+                   other[[n]][subset,,drop=FALSE],
+                   envir = MEM@env)
+        else
+            assign(n,
+                   other[[n]][subset],
+                   envir = MEM@env)
+    }
     
     MEM@get <- function(which, data=NULL, frame=NULL, envir = MEM@env)
     {
@@ -224,7 +237,7 @@ ModelEnvMatrix <- function(designMatrix=NULL, responseMatrix=NULL,
                    envir = envir)            
         }
     }
-    
+
     ## handle NA's
     if (!is.null(na.action))
         MEM <- na.action(MEM)

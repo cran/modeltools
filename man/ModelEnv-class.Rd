@@ -30,6 +30,7 @@ Objects can be created by calls of the form \code{new("ModelEnv", ...)}.
           objects from environment \code{env}.}
     \item{\code{set}:}{Object of class \code{"function"} for setting
           object in environment \code{env}.}
+    \item{\code{hooks}:}{A list of hook collections.}
   }
 }
 \section{Methods}{
@@ -79,12 +80,18 @@ dimension(me, "response")
 ### extract the data
 me@get("response")
 
-### NA handling
 df <- data.frame(x = rnorm(10), y = rnorm(10))
+
+## hook for set method:
+mf <- ModelEnvFormula(y ~ x-1, data = df, setHook=list(designMatrix=scale))
+mf@get("designMatrix")
+mf@set(data=df[1:5,])
+mf@get("designMatrix")
+
+### NA handling
 df$x[1] <- NA
-mf <- ModelEnvFormula(x ~ y, data = df, na.action = na.pass)
+mf <- ModelEnvFormula(y ~ x, data = df, na.action = na.pass)
 mf
 na.omit(mf)
-
 }
 \keyword{classes}

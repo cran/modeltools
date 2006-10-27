@@ -5,11 +5,11 @@
     A simple model environment creator function working off matrices for
     input and response. This is much simpler and more limited than
     formula-based environments, but faster and easier to use, if only
-    matrices are allowd as input.
+    matrices are allowed as input.
 }
 \usage{
 ModelEnvMatrix(designMatrix=NULL, responseMatrix=NULL,
-               subset = NULL, na.action = NULL, ...)
+               subset = NULL, na.action = NULL, other=list(), ...)
 }
 \arguments{
   \item{designMatrix}{design matrix of input}
@@ -18,6 +18,7 @@ ModelEnvMatrix(designMatrix=NULL, responseMatrix=NULL,
                  be used in the fitting process. }
   \item{na.action}{ a function which indicates what should happen when the data
           contain \code{NA}'s. }
+  \item{other}{ an optional named list of additional formulae. }
   \item{\dots}{currently not used}
 }
 \details{

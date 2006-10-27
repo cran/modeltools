@@ -7,7 +7,8 @@ exportClasses("ModelEnv", "FormulaParts", "ModelEnvFormula", "StatModel",
               "StatModelCapabilities")
 
 exportMethods("subset", "show", "dimension", "clone", "has", "initialize",
-              "fit", "dpp", "na.omit", "na.fail", "na.pass", "subset")
+              "fit", "dpp", "na.omit", "na.fail", "na.pass", "subset",
+              "MEapply")
 
 S3method(fitted, linearModel)
 S3method(model.matrix, linearModel)

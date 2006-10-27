@@ -15,6 +15,7 @@
     \item{\code{set}:}{Object of class \code{"function"} for setting
           object in environment \code{env}.}
     \item{\code{formula}:}{Object of class \code{"list"}.}
+    \item{\code{hooks}:}{A list of hook collections.}
   }
 }
 \section{Extends}{

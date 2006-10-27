@@ -1,4 +1,10 @@
 
+CHANGES IN `modeltools' VERSION 0.2-8
+
+  o ModelEnvFormula(y ~ 1) works now
+
+  o new function MEapply (only roughly documented, more to come)
+
 CHANGES IN `modeltools' VERSION 0.2-7
 
   o add methods and stats to Depends:
