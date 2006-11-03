@@ -1,6 +1,24 @@
 
 CHANGES IN `modeltools' VERSION 0.2-8
 
+  o the following code didn't work
+
+    tmp <- function(formula, data = list(), subset = NULL) 
+        ModelEnvFormula(formula, data, subset = subset, frame = parent.frame())
+    foo <- function(x, y, ...) tmp(y ~ x, ...)
+    a <- 1:10     
+    b <- 1:10     
+    stopifnot(identical(foo(a, b, subset = 1:5)@get("response")[[1]],1:5)) 
+    ### was: couldn't find `y' when rame' wasn't specified
+
+    x <- 1
+    y <- 2   
+    stopifnot(identical(foo(a, b, subset = 1:5)@get("response")[[1]],1:5))   
+    ### was: found `x' and `y' in .GlobalEnv when `frame' wasn't specified
+
+
+CHANGES IN `modeltools' VERSION 0.2-8
+
   o ModelEnvFormula(y ~ 1) works now
 
   o new function MEapply (only roughly documented, more to come)

@@ -41,3 +41,15 @@ df <- data.frame(y = 1:10)
 mf <- ModelEnvFormula(y ~ 1, data = df)
 x <- mf@get("designMatrix")
 stopifnot(nrow(x) == 10 && all(x[,1] == 1))
+
+### bugfix: subset was not correctly interpreted in `frame'
+tmp <- function(formula, data = list(), subset = NULL) 
+    ModelEnvFormula(formula, data, subset = subset, frame = parent.frame())
+foo <- function(x, y, ...) tmp(y ~ x, ...)
+a <- 1:10     
+b <- 1:10     
+stopifnot(identical(foo(a, b, subset = 1:5)@get("response")[[1]],1:5)) 
+
+x <- 1
+y <- 2   
+stopifnot(identical(foo(a, b, subset = 1:5)@get("response")[[1]],1:5))   

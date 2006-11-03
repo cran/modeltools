@@ -14,7 +14,13 @@ ModelEnvFormula <- function(formula, data = list(), subset = NULL,
                names(mf), 0)
     mf <- mf[c(1, m)]
     mf[[1]] <- as.name("model.frame")
-    if (is.null(subset)) mf$subset <- NULL
+    if (is.null(subset)) {
+        mf$subset <- NULL
+    } else {
+        ### we need to evaluate subset here since it 
+        ### might not be possible in `frame'
+        mf$subset <- subset
+    }
 
     ### NA-handling will for the ModelFrame objects later on...
     mf$na.action <- stats::na.pass
