@@ -7,7 +7,8 @@
 }
 \usage{
 ModelEnvFormula(formula, data = list(), subset = NULL, 
-                na.action = NULL, frame = NULL, other = list(), 
+                na.action = NULL, frame = NULL, 
+                enclos = sys.frame(sys.nframe()), other = list(), 
                 designMatrix = TRUE, responseMatrix = TRUE,
                 setHook = NULL, ...)
 }
@@ -22,6 +23,10 @@ ModelEnvFormula(formula, data = list(), subset = NULL,
   \item{na.action}{ a function which indicates what should happen when the data
           contain \code{NA}'s. }
   \item{frame}{ an optional environment \code{formula} is evaluated in. }
+  \item{enclos}{ specifies the enclosure passed to \code{\link{eval}} for
+                 evaluating the model frame. The model frame is evaluated in 
+                 \code{envir = frame} with \code{enclos = enclos}, 
+                 see \code{\link{eval}}.}
   \item{other}{ an optional named list of additional formulae. }
   \item{designMatrix}{ a logical indicating whether the design matrix
                        defined by the right hand side of \code{formula} 

@@ -1,5 +1,11 @@
+CHANGES IN `modeltools' VERSION 0.2-10
 
-CHANGES IN `modeltools' VERSION 0.2-8
+  o Added several generic functions: ICL, KLdiv, cluster, getModel, parameters,
+    posterior, prior, refit, info, infoCheck
+
+  o fix problems with evaluating subset arguments
+
+CHANGES IN `modeltools' VERSION 0.2-9
 
   o the following code didn't work
 
@@ -9,7 +15,7 @@ CHANGES IN `modeltools' VERSION 0.2-8
     a <- 1:10     
     b <- 1:10     
     stopifnot(identical(foo(a, b, subset = 1:5)@get("response")[[1]],1:5)) 
-    ### was: couldn't find `y' when rame' wasn't specified
+    ### was: couldn't find `y' when `frame' wasn't specified
 
     x <- 1
     y <- 2   

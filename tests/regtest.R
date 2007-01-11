@@ -45,7 +45,7 @@ stopifnot(nrow(x) == 10 && all(x[,1] == 1))
 ### bugfix: subset was not correctly interpreted in `frame'
 tmp <- function(formula, data = list(), subset = NULL) 
     ModelEnvFormula(formula, data, subset = subset, frame = parent.frame())
-foo <- function(x, y, ...) tmp(y ~ x, ...)
+foo <- function(x, y, subset, ...) tmp(y ~ x, subset = subset, ...)
 a <- 1:10     
 b <- 1:10     
 stopifnot(identical(foo(a, b, subset = 1:5)@get("response")[[1]],1:5)) 
@@ -53,3 +53,16 @@ stopifnot(identical(foo(a, b, subset = 1:5)@get("response")[[1]],1:5))
 x <- 1
 y <- 2   
 stopifnot(identical(foo(a, b, subset = 1:5)@get("response")[[1]],1:5))   
+
+### subset problems
+menv <- ModelEnvFormula(Species ~ ., data = iris, 
+                        subset = (iris$Species != "virginica"))
+stopifnot(nrow(menv@get("input")) == 100)
+stopifnot(nrow(menv@get("input", data = iris)) == 150)
+
+menv <- ModelEnvFormula(Species ~ ., data = iris, 
+                        subset = (iris$Species != "virginica"), 
+                        keep.subset = TRUE)
+stopifnot(nrow(menv@get("input")) == 100)
+stopifnot(nrow(menv@get("input", data = iris)) == 150)
+

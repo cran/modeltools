@@ -3,10 +3,11 @@
 ### `ModelEnv'
 
 ModelEnvFormula <- function(formula, data = list(), subset = NULL, 
-                            na.action = NULL, frame = NULL,
+                            na.action = NULL, frame = NULL, 
+                            enclos = sys.frame(sys.nframe()),
                             other = list(), designMatrix = TRUE,
                             responseMatrix = TRUE,
-                            setHook=NULL, ...)
+                            setHook = NULL, ...)
 {
   
     mf <- match.call(expand.dots = FALSE)
@@ -14,13 +15,6 @@ ModelEnvFormula <- function(formula, data = list(), subset = NULL,
                names(mf), 0)
     mf <- mf[c(1, m)]
     mf[[1]] <- as.name("model.frame")
-    if (is.null(subset)) {
-        mf$subset <- NULL
-    } else {
-        ### we need to evaluate subset here since it 
-        ### might not be possible in `frame'
-        mf$subset <- subset
-    }
 
     ### NA-handling will for the ModelFrame objects later on...
     mf$na.action <- stats::na.pass
@@ -31,15 +25,19 @@ ModelEnvFormula <- function(formula, data = list(), subset = NULL,
     
     if (is.null(frame)) frame <- parent.frame()
 
+    mf$subset <- try(subset)
+    if (inherits(mf$subset, "try-error")) mf$subset <- NULL
+
     MEF@get <- function(which, data=NULL, frame=parent.frame(), envir = MEF@env)
     {
         if(is.null(data))
             RET <- get(which, envir = envir, inherits=FALSE)
         else{
             oldData <- get(which, envir = envir, inherits=FALSE)
+            if (!use.subset) mf$subset <- NULL
             mf$data <- data
             mf$formula <- MEF@formula[[which]]
-            RET <- eval(mf, frame)
+            RET <- eval(mf, frame, enclos = enclos)
             checkData(oldData, RET)
         }
         return(RET)
@@ -60,10 +58,8 @@ ModelEnvFormula <- function(formula, data = list(), subset = NULL,
             mf$data <- data
             mf$formula <- MEF@formula[[name]]
 
-            ### <FIXME> if subset was specied, we try to evaluate it
-            ###         everytime `set' is called, even for new data
-            ### </FIXME>
-            MF <- eval(mf, frame)
+            if (!use.subset) mf$subset <- NULL
+            MF <- eval(mf, frame, enclos = enclos)
             if (exists(name, envir = envir, inherits = FALSE))
                 checkData(get(name, envir = envir, inherits = FALSE), MF)
             assign(name, MF, envir = envir)
@@ -88,8 +84,10 @@ ModelEnvFormula <- function(formula, data = list(), subset = NULL,
         }
         MEapply(MEF, MEF@hooks$set, clone=FALSE)
     }
-    
+
+    use.subset <- TRUE
     MEF@set(which = NULL, data = data, frame = frame)
+    use.subset <- FALSE
     
     ### handle NA's
     if (!is.null(na.action))
