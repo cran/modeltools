@@ -1,4 +1,8 @@
 
+CHANGES IN `modeltools' VERSION 0.2-12
+
+  o fix Rd problems
+
 CHANGES IN `modeltools' VERSION 0.2-11
 
   o added argument newdata to generic cluster()

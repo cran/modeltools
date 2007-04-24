@@ -8,7 +8,7 @@
 \alias{info,ANY,missing-method}
 \title{Get Information on Fitted Objects}
 \description{
-  Returns descriptive information about fitted objects.}
+  Returns descriptive information about fitted objects.
 }
 \usage{
 info(object, which, ...)
