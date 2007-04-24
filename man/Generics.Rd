@@ -15,7 +15,7 @@
 \usage{
 ICL(object, \dots)
 KLdiv(object, \dots)
-cluster(object, \dots)
+cluster(object, newdata, \dots)
 getModel(object, \dots)
 parameters(object, \dots)
 posterior(object, newdata, \dots)
@@ -33,7 +33,8 @@ refit(object, \dots)
     \item{ICL:}{Integrated Completed Likelihood criterion for model
       selection.}
     \item{KLdiv:}{Kullback-Leibler divergence.}
-    \item{cluster:}{Extract cluster membership information.}
+    \item{cluster:}{Get cluster membership information from a model or
+      compute it for new data.}
     \item{getModel:}{Get single model from a collection of models.}
     \item{parameters:}{Get parameters of a model (similar to but more
       general than \code{\link{coefficients}}).}
