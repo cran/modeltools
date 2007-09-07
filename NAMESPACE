@@ -2,8 +2,8 @@ import(methods)
 import(stats)
 
 export(ModelEnvFormula, ModelEnvMatrix, linearModel, glinearModel,
-       survReg, Predict, ICL, KLdiv, cluster, getModel, parameters,
-       posterior, prior, refit, info, infoCheck)
+       survReg, Predict, ICL, KLdiv, Lapply, cluster, getModel,
+       parameters, posterior, prior, refit, info, infoCheck)
 
 exportClasses("ModelEnv", "FormulaParts", "ModelEnvFormula", "StatModel",
               "StatModelCapabilities")
