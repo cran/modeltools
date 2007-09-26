@@ -1,3 +1,9 @@
+
+
+CHANGES IN `modeltools' VERSION 0.2-14
+
+  o `object' in `Predict(object)' might be an S4 object and $ can't be used.
+
 CHANGES IN `modeltools' VERSION 0.2-13
 
   o new generic Lapply

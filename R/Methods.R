@@ -167,11 +167,9 @@ setMethod("dpp", signature = "StatModel",
 ### don't want to redefine stats:::predict, but ...
 
 Predict <- function(object, ...) {
-    if (!is.null(object$statmodel) && 
-        is(object$statmodel, "StatModel")) {
-        object$statmodel@predict(object, ...)
-    } else {
-        predict(object, ...)
+    if ("statmodel" %in% names(object)) {
+        if (is(object$statmodel, "StatModel"))
+            return(object$statmodel@predict(object, ...))
     }
+    return(predict(object))
 }
-
