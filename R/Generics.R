@@ -1,6 +1,6 @@
 #
 #  Copyright (C) 2006 Torsten Hothorn, Friedrich Leisch
-#  $Id: Generics.R 3595 2007-06-29 16:08:37Z gruen $
+#  $Id: Generics.R 3937 2008-03-28 14:56:01Z leisch $
 #
 
 
@@ -14,7 +14,7 @@ setGeneric("KLdiv", function(object, ...) standardGeneric("KLdiv"))
 
 setGeneric("Lapply", function(object, FUN, ...) standardGeneric("Lapply"))
 
-setGeneric("cluster", function(object, newdata, ...) standardGeneric("cluster"))
+setGeneric("clusters", function(object, newdata, ...) standardGeneric("clusters"))
 
 setGeneric("getModel", function(object, ...) standardGeneric("getModel"))
 

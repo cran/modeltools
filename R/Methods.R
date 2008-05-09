@@ -30,23 +30,23 @@ setMethod("show", signature = "ModelEnv",
     n <- NULL
     if (has(object, "response")) {
         cat("  response variable(s):  ",
-            colnames(object@get("response")), "\n")
+            colnamesnum(object@get("response")), "\n")
         n <- nrow(object@get("response"))
     }
     else if (has(object, "responseMatrix")) {
         cat("  response matrix column(s): ",
-            colnames(object@get("responseMatrix")), "\n")
+            colnamesnum(object@get("responseMatrix")), "\n")
         n <- nrow(object@get("responseMatrix"))
     }
     
     if (has(object, "input")) {
         cat("  input variable(s):     ",
-            colnames(object@get("input")), "\n")
+            colnamesnum(object@get("input")), "\n")
         n <- nrow(object@get("input"))
     }
     else if (has(object, "designMatrix")) {
         cat("  design matrix column(s): ",
-            colnames(object@get("designMatrix")), "\n")
+            colnamesnum(object@get("designMatrix")), "\n")
         n <- nrow(object@get("designMatrix"))
     }
     
@@ -73,6 +73,14 @@ setMethod("show", signature = "ModelEnv",
 
 })
 
+## Utility function: return either names or number of columns
+colnamesnum <- function(x)
+{
+    if(is.null(colnames(x)))
+        return(ncol(x))
+    else
+        return(colnames(x))
+}
 
 
 setGeneric("has", function(object, which) standardGeneric("has"))
@@ -93,6 +101,15 @@ setMethod("dimension", signature(object = "ModelEnv", which = "character"),
             NULL
     }
 )
+
+
+setGeneric("empty", function(object) standardGeneric("empty"))
+
+setMethod("empty", signature(object = "ModelEnv"),
+          definition = function(object) length(ls(object@env))==0)
+
+
+###**********************************************************
 
 setGeneric("clone", function(object, ...) standardGeneric("clone"))
 
@@ -171,5 +188,5 @@ Predict <- function(object, ...) {
         if (is(object$statmodel, "StatModel"))
             return(object$statmodel@predict(object, ...))
     }
-    return(predict(object))
+    return(predict(object, ...))
 }

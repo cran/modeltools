@@ -7,7 +7,7 @@ complete.cases.ModelEnv <- function(x) {
 
 }
 
-setGeneric("na.fail", useAsDefault = na.fail)
+# setGeneric("na.fail", useAsDefault = na.fail)
 
 setMethod("na.fail", signature = "ModelEnv", definition = function(object, ...) {
 
@@ -16,7 +16,7 @@ setMethod("na.fail", signature = "ModelEnv", definition = function(object, ...) 
     return(object)
 })
 
-setGeneric("na.pass", useAsDefault = na.pass)
+# setGeneric("na.pass", useAsDefault = na.pass)
 
 setMethod("na.pass", signature = "ModelEnv", definition = function(object, ...) {  
 
@@ -24,7 +24,7 @@ setMethod("na.pass", signature = "ModelEnv", definition = function(object, ...) 
 
 })
 
-setGeneric("na.omit", useAsDefault = na.omit)
+# setGeneric("na.omit", useAsDefault = na.omit)
 
 setMethod("na.omit", signature = "ModelEnv", definition = function(object, ...) {
 

@@ -1,12 +1,14 @@
 \name{ModelEnv-class}
 \docType{class}
 \alias{ModelEnv-class}
-\alias{clone,ModelEnv-method}
 \alias{clone}
-\alias{dimension,ModelEnv,character-method}
+\alias{clone,ModelEnv-method}
 \alias{dimension}
-\alias{has,ModelEnv,character-method}
+\alias{dimension,ModelEnv,character-method}
+\alias{empty}
+\alias{empty,ModelEnv-method}
 \alias{has}
+\alias{has,ModelEnv,character-method}
 \alias{initialize,ModelEnv-method}
 \alias{show,ModelEnv-method}
 \alias{subset,ModelEnv-method}
@@ -38,6 +40,8 @@ Objects can be created by calls of the form \code{new("ModelEnv", ...)}.
     \item{clone}{\code{signature(object = "ModelEnv")}: copy an object. }
     \item{dimension}{\code{signature(object = "ModelEnv", which = "character")}:
                      get the dimension of an object. }
+    \item{empty}{\code{signature(object = "ModelEnv")}: Return
+      \code{TRUE}, if the model environment contains no data.}
     \item{has}{\code{signature(object = "ModelEnv", which = "character")}:
                check if an object \code{which} is available in \code{env}. }
     \item{initialize}{\code{signature(.Object = "ModelEnv")}: setup new
@@ -67,9 +71,15 @@ Objects can be created by calls of the form \code{new("ModelEnv", ...)}.
 ### a new object
 me <- new("ModelEnv")
 
+## the new model environment is empty
+empty(me)
+
 ### define a bivariate response variable
 me@set("response", data.frame(y = rnorm(10), x = runif(10)))
 me
+
+## now it is no longer empty
+empty(me)
 
 ### check if a response is available
 has(me, "response")

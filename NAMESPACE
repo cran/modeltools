@@ -2,7 +2,7 @@ import(methods)
 import(stats)
 
 export(ModelEnvFormula, ModelEnvMatrix, linearModel, glinearModel,
-       survReg, Predict, ICL, KLdiv, Lapply, cluster, getModel,
+       survReg, Predict, ICL, KLdiv, Lapply, clusters, getModel,
        parameters, posterior, prior, refit, info, infoCheck)
 
 exportClasses("ModelEnv", "FormulaParts", "ModelEnvFormula", "StatModel",
@@ -10,7 +10,7 @@ exportClasses("ModelEnv", "FormulaParts", "ModelEnvFormula", "StatModel",
 
 exportMethods("subset", "show", "dimension", "clone", "has", "initialize",
               "fit", "dpp", "na.omit", "na.fail", "na.pass", "subset",
-              "MEapply", "info")
+              "MEapply", "info", "empty")
 
 S3method(fitted, linearModel)
 S3method(model.matrix, linearModel)

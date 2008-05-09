@@ -66,3 +66,9 @@ menv <- ModelEnvFormula(Species ~ ., data = iris,
 stopifnot(nrow(menv@get("input")) == 100)
 stopifnot(nrow(menv@get("input", data = iris)) == 150)
 
+
+###**********************************************************
+
+stopifnot(!empty(menv))
+menv1 <- new("ModelEnv")
+stopifnot(empty(menv1))

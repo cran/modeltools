@@ -1,4 +1,16 @@
 
+CHANGES IN `modeltools' VERSION 0.2-15
+
+  o `Predict' didn't pass ... to `predict'
+
+  o new generic and method `empty'
+
+  o the `show' method now prints the number of columns if a data
+    object has no colnames.
+
+  o renamed `cluster' to `clusters' to avoid conflict with `cluster' 
+    from package survival 
+
 
 CHANGES IN `modeltools' VERSION 0.2-14
 

@@ -2,7 +2,7 @@
 \alias{ICL}
 \alias{KLdiv}
 \alias{Lapply}
-\alias{cluster}
+\alias{clusters}
 \alias{getModel}
 \alias{parameters}
 \alias{posterior}
@@ -17,7 +17,7 @@
 ICL(object, \dots)
 KLdiv(object, \dots)
 Lapply(object, FUN, \dots)
-cluster(object, newdata, \dots)
+clusters(object, newdata, \dots)
 getModel(object, \dots)
 parameters(object, \dots)
 posterior(object, newdata, \dots)
@@ -37,7 +37,7 @@ refit(object, newdata, \dots)
       selection.}
     \item{KLdiv:}{Kullback-Leibler divergence.}
     \item{Lapply:}{S4 generic for \code{lapply}}
-    \item{cluster:}{Get cluster membership information from a model or
+    \item{clusters:}{Get cluster membership information from a model or
       compute it for new data.}
     \item{getModel:}{Get single model from a collection of models.}
     \item{parameters:}{Get parameters of a model (similar to but more
