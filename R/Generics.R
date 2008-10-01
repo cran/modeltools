@@ -1,6 +1,6 @@
 #
 #  Copyright (C) 2006 Torsten Hothorn, Friedrich Leisch
-#  $Id: Generics.R 3937 2008-03-28 14:56:01Z leisch $
+#  $Id: Generics.R 4119 2008-09-22 14:49:39Z leisch $
 #
 
 
@@ -25,6 +25,9 @@ setGeneric("posterior", function(object, newdata, ...) standardGeneric("posterio
 setGeneric("prior", function(object, ...) standardGeneric("prior"))
 
 setGeneric("refit", function(object, newdata, ...) standardGeneric("refit"))
+
+setGeneric("relabel", function(object, by, ...) standardGeneric("relabel"))
+
 
 ###**********************************************************
 

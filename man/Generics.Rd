@@ -8,6 +8,7 @@
 \alias{posterior}
 \alias{prior}
 \alias{refit}
+\alias{relabel}
 \title{Generic Utility Functions}
 \description{
   A collection of standard generic functions for which other packages
@@ -23,11 +24,13 @@ parameters(object, \dots)
 posterior(object, newdata, \dots)
 prior(object, \dots)
 refit(object, newdata, \dots)
+relabel(object, by, \dots)
 }
 \arguments{
   \item{object}{S4 classed object.}
   \item{FUN}{The function to be applied.}
   \item{newdata}{Optional new data.}
+  \item{by}{Typically a character string specifying how to relabel the object.}
   \item{\dots}{Some methods for these generic function may take
     additional, optional arguments.}
 }
@@ -48,6 +51,8 @@ refit(object, newdata, \dots)
     \item{refit:}{Refit a model (usually to obtain additional
       information that was not computed or stored during the initial
       fitting process).}
+    \item{relabel:}{Relabel a model (usually to obtain a new permutation
+      of labels in mixture models or cluster objects).}
   }
 }
 \keyword{methods}
