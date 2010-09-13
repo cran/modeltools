@@ -3,7 +3,7 @@
 
 complete.cases.ModelEnv <- function(x) {
     
-    do.call("complete.cases", lapply(ls(x@env), function(o) x@get(o)))
+    do.call("complete.cases", as.data.frame(lapply(ls(x@env), function(o) x@get(o))))
 
 }
 
