@@ -1,7 +1,7 @@
 Package: modeltools
 Title: Tools and Classes for Statistical Models
-Date: 2010-09-13
-Version: 0.2-17
+Date: 2011-08-23
+Version: 0.2-18
 Author: Torsten Hothorn, Friedrich Leisch, Achim Zeileis
 Maintainer: Torsten Hothorn <Torsten.Hothorn@R-project.org>
 Description: A collection of tools to deal with statistical models. The
@@ -15,6 +15,6 @@ Depends: stats, stats4
 Imports: methods
 LazyLoad: yes
 License: GPL-2
-Packaged: 2010-09-13 16:24:32 UTC; zeileis
+Packaged: 2011-08-23 10:00:23 UTC; hothorn
 Repository: CRAN
-Date/Publication: 2010-09-13 16:29:15
+Date/Publication: 2011-08-23 20:03:03
