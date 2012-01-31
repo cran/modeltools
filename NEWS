@@ -1,4 +1,8 @@
 
+CHANGES IN `modeltools' VERSION 0.2-19
+
+  o  added model.matrix.survReg
+
 CHANGES IN `modeltools' VERSION 0.2-17
 
   o COPYING -> LICENSE

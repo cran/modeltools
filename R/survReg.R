@@ -39,3 +39,8 @@ print.survReg <- function(x, digits = max(3, getOption("digits") - 3), ...)
 logLik.survReg <- function(object, ...) {
   structure(object$loglik[2], df = NCOL(object$var), class = "logLik")
 }
+
+model.matrix.survReg <- function(object, data, ...) {
+  if(missing(data)) return(model.matrix(object, model.frame(object), ...))
+  NextMethod()
+}
