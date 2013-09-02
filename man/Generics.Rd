@@ -9,6 +9,7 @@
 \alias{prior}
 \alias{refit}
 \alias{relabel}
+\alias{ParseFormula}
 \title{Generic Utility Functions}
 \description{
   A collection of standard generic functions for which other packages
@@ -25,9 +26,12 @@ posterior(object, newdata, \dots)
 prior(object, \dots)
 refit(object, newdata, \dots)
 relabel(object, by, \dots)
+ParseFormula(formula, data = list())
 }
 \arguments{
   \item{object}{S4 classed object.}
+  \item{formula}{A model formula.}
+  \item{data}{An optional data frame.}
   \item{FUN}{The function to be applied.}
   \item{newdata}{Optional new data.}
   \item{by}{Typically a character string specifying how to relabel the object.}

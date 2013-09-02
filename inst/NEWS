@@ -1,4 +1,8 @@
 
+CHANGES IN `modeltools' VERSION 0.2-21
+
+  o  export ParseFormula
+
 CHANGES IN `modeltools' VERSION 0.2-20
 
   o  fix NAMESPACE issues
