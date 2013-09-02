@@ -1,4 +1,8 @@
 
+CHANGES IN `modeltools' VERSION 0.2-20
+
+  o  fix NAMESPACE issues
+
 CHANGES IN `modeltools' VERSION 0.2-19
 
   o  added model.matrix.survReg
