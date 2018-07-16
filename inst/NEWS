@@ -1,4 +1,8 @@
 
+CHANGES IN `modeltools' VERSION 0.2-22
+
+  o  inst/NEWS exclusively
+
 CHANGES IN `modeltools' VERSION 0.2-21
 
   o  export ParseFormula
