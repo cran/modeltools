@@ -1,4 +1,8 @@
 
+CHANGES IN `modeltools' VERSION 0.2-23
+
+  o  /bin/sh is portable
+
 CHANGES IN `modeltools' VERSION 0.2-22
 
   o  inst/NEWS exclusively
